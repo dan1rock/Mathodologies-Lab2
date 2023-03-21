@@ -45,6 +45,6 @@ To run tests:
 ```bash
 $ npm test
 ```
-##Conclusion
+## Conclusion
 
 Unit tests worth the time spent on implementing them. They helped me with finding and fixing them without manually running all king of situations. Their true potention revealed when working in big team of developers, because if all unit tests passed you can trust changes that were made by other developers.
