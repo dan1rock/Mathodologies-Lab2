@@ -76,6 +76,7 @@ class SinglyLinkedList {
   }
 
   deleteAll(element) {
+    validateElement(element);
     if (this.head === this.tail) {
       return;
     }
@@ -126,6 +127,7 @@ class SinglyLinkedList {
   }
 
   findFirst(element) {
+    validateElement(element);
     let node = this.head;
     for (let i = 0; i < this.length(); i++) {
       if (node.value === element) return i;
@@ -135,6 +137,7 @@ class SinglyLinkedList {
   }
 
   findLast(element) {
+    validateElement(element);
     let node = this.head;
     let lastIndex = -1;
     for (let i = 0; i < this.length(); i++) {
