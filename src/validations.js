@@ -7,7 +7,7 @@ const validateElement = (element) => {
 };
 
 const validateIndex = (index, length) => {
-  if (typeof index !== 'number') {
+  if (typeof index === 'number') {
     throw new Error('Index must be a number');
   }
   if (index < 0 || index >= length) {
