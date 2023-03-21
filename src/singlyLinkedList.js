@@ -62,15 +62,14 @@ class SinglyLinkedList {
     } else if (index === 0) {
       deletedItem = this.head.value;
       this.head = this.head.next;
-      this.tail.next = this.head;
     } else {
       let node = this.head;
       for (let i = 0; i < index - 1; i++) {
         node = node.next;
       }
       deletedItem = node.next.value;
-      if (index === this.length - 1) this.tail = node;
       node.next = node.next.next;
+      if (index === this.length() - 1) this.tail = node;
     }
     return deletedItem;
   }
@@ -83,7 +82,7 @@ class SinglyLinkedList {
     let counter = 0;
     let nodeToDelete = this.head;
     while (nodeToDelete !== null) {
-      if (nodeToDelete.val === element) {
+      if (nodeToDelete.value === element) {
         this.delete(counter);
         counter--;
       }
@@ -113,17 +112,18 @@ class SinglyLinkedList {
 
   reverse() {
     let current = this.head;
-    let prev = this.tail;
     let i = 0;
-    while (i < this.size) {
-      const next = current.next;
-      current.next = prev;
-      prev = current;
-      current = next;
+    while (i < this.length() / 2) {
+      let last = this.head;
+      for (let j = 1; j < this.length() - i; j++) {
+        last = last.next;
+      }
+      const buffer = last.value;
+      last.value = current.value;
+      current.value = buffer;
+      current = current.next;
       i++;
     }
-    this.head = prev;
-    if (this.size > 0) this.tail = this.head.next;
   }
 
   findFirst(element) {

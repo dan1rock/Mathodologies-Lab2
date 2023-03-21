@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
 'use strict';
+
 const { SinglyLinkedList } = require('../src/singlyLinkedList');
 
 test('Empty list length must be 0', () => {
