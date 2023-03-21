@@ -1,5 +1,5 @@
 {
-  "name": "mathodologies-lab2",
+  "name": "methodologies-lab2",
   "version": "1.0.0",
   "description": "Linked lists",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dan1rock/Mathodologies-Lab2.git"
+    "url": "git+https://github.com/dan1rock/Methodologies-Lab2.git"
   },
   "keywords": [
     "linked",
@@ -20,9 +20,9 @@
   "author": "Danylo Holets",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dan1rock/Mathodologies-Lab2/issues"
+    "url": "https://github.com/dan1rock/Methodologies-Lab2/issues"
   },
-  "homepage": "https://github.com/dan1rock/Mathodologies-Lab2#readme",
+  "homepage": "https://github.com/dan1rock/Methodologies-Lab2#readme",
   "dependencies": {
     "eslint": "^8.36.0"
   },
