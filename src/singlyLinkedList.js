@@ -69,7 +69,7 @@ class SinglyLinkedList {
       }
       deletedItem = node.next.value;
       node.next = node.next.next;
-      if (index === this.length() - 1) this.tail = node;
+      if (index === this.length()) this.tail = node;
     }
     return deletedItem;
   }

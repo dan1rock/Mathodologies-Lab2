@@ -36,9 +36,9 @@ Install all dependancies:
 $ npm install
 ```
 
-To run application:
+To run example:
 ```bash
-$ node index.js
+$ npm start
 ```
 
 To run tests:
