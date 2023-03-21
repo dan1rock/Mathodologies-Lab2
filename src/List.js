@@ -1,6 +1,6 @@
 'use strict';
 
-const { validateElement, validateIndex } = require('./validations');
+const { validateElement, validateIndex } = require('./validations.js');
 
 class List {
   constructor() {

@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 'use strict';
 
-const { List } = require('../src/list');
+const { List } = require('../src/list.js');
 
 test('Empty list length must be 0', () => {
   const list = new List();
