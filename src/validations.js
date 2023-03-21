@@ -1,17 +1,18 @@
 'use strict';
 
-const isChar = (element) => {
+const validateElement = (element) => {
   if (typeof element !== 'string' || element.length !== 1) {
-    return false;
+    throw new Error('Element type must be char');
   }
-  return true;
 };
 
 const validateIndex = (index, length) => {
-  if (index < 0 || index >= length) {
-    return false;
+  if (typeof index !== 'number') {
+    throw new Error('Index must be a number');
   }
-  return true;
+  if (index < 0 || index >= length) {
+    throw new Error('Index out of range');
+  }
 };
 
-module.exports = { isChar, validateIndex };
+module.exports = { validateElement, validateIndex };

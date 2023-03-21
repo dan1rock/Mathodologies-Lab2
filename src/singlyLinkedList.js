@@ -1,7 +1,7 @@
 'use strict';
 
 const { SinglyLinkedListNode } = require('./singlyLinkedListNode.js');
-const { isChar, validateIndex } = require('./validations');
+const { validateElement, validateIndex } = require('./validations');
 
 class SinglyLinkedList {
   constructor() {
@@ -13,7 +13,7 @@ class SinglyLinkedList {
     if (this.head === null && this.tail === null) {
       return 0;
     }
-    let count = 0;
+    let count = 1;
     let node = this.head;
     while (node.next !== null) {
       node = node.next;
@@ -23,109 +23,96 @@ class SinglyLinkedList {
   }
 
   append(element) {
-    if (!isChar(element)) {
-      return;
-    }
+    validateElement(element);
     const newNode = new SinglyLinkedListNode(element);
-    if (!this.head || !this.tail) {
-      this.head = newNode;
-      this.tail = newNode;
-
-      return this;
-    }
-    this.tail.next = newNode;
+    if (!this.head) this.head = newNode;
+    else this.tail.next = newNode;
     this.tail = newNode;
   }
 
   insert(element, index) {
-    if (!isChar(element) || !validateIndex(index)) {
-      return;
-    }
-    const node = new SinglyLinkedListNode(element);
+    validateElement(element);
+    validateIndex(index, this.length());
+    const newNode = new SinglyLinkedListNode(element);
     if (index === 0) {
-      node.next = this.head;
-      this.head = node;
-      this.tail = node;
+      newNode.next = this.head;
+      this.head = newNode;
+      this.tail = newNode;
     } else if (index === this.size) {
-      this.tail.next = node;
-      this.tail = node;
-      node.next = this.head;
+      this.tail.next = newNode;
+      this.tail = newNode;
+      newNode.next = this.head;
     } else {
-      let current = this.head;
+      let node = this.head;
       for (let i = 0; i < index - 1; i++) {
-        current = current.next;
+        node = node.next;
       }
-      node.next = current.next;
-      current.next = node;
+      newNode.next = node.next;
+      node.next = newNode;
     }
   }
 
   delete(index) {
-    if (!validateIndex(index)) {
-      return;
-    }
+    validateIndex(index, this.length());
     let deletedItem = null;
-    if (this.size === 1) {
+    if (this.length() === 1) {
       deletedItem = this.head.value;
       this.head = null;
       this.tail = null;
     } else if (index === 0) {
-      deletedItem = this.head.data;
+      deletedItem = this.head.value;
       this.head = this.head.next;
       this.tail.next = this.head;
     } else {
-      let current = this.head;
+      let node = this.head;
       for (let i = 0; i < index - 1; i++) {
-        current = current.next;
+        node = node.next;
       }
-      deletedItem = current.next.data;
-      current.next = current.next.next;
-      if (index === this.length - 1) this.tail = current;
+      deletedItem = node.next.value;
+      if (index === this.length - 1) this.tail = node;
+      node.next = node.next.next;
     }
     return deletedItem;
   }
 
   deleteAll(element) {
-    let current = this.head;
-    let prev = this.tail;
+    let node = this.head;
+    let prevNode = this.tail;
     let i = 0;
-    while (i < this.length) {
-      if (current.data === element) {
+    while (i < this.length()) {
+      if (node.value === element) {
         if (i === 0) {
           this.head = this.head.next;
           this.tail.next = this.head;
-          prev = this.tail;
+          prevNode = this.tail;
         } else {
-          prev.next = current.next;
-          if (i === this.length - 1) this.tail = prev;
+          prevNode.next = node.next;
+          if (i === this.length() - 1) this.tail = prevNode;
         }
-        this.size--;
         i--;
       } else {
-        prev = current;
+        prevNode = node;
       }
-      current = current.next;
+      node = node.next;
       i++;
     }
   }
 
   get(index) {
-    if (!validateIndex(index)) {
-      return;
+    validateIndex(index, this.length());
+    let node = this.head;
+    for (let i = 0; i < index; i++) {
+      node = node.next;
     }
-    let current = this.head;
-    for (let i = 0; i < index - 1; i++) {
-      current = current.next;
-    }
-    return current.data;
+    return node.value;
   }
 
   clone() {
     const newList = new SinglyLinkedList();
-    let current = this.head;
-    for (let i = 0; i < this.length; i++) {
-      newList.append(current.data);
-      current = current.next;
+    let node = this.head;
+    for (let i = 0; i < this.length(); i++) {
+      newList.append(node.value);
+      node = node.next;
     }
     return newList;
   }
@@ -133,31 +120,33 @@ class SinglyLinkedList {
   reverse() {
     let current = this.head;
     let prev = this.tail;
-    for (let i = 0; i < this.length; i++) {
+    let i = 0;
+    while (i < this.size) {
       const next = current.next;
       current.next = prev;
       prev = current;
       current = next;
+      i++;
     }
     this.head = prev;
-    if (this.length > 0) this.tail = this.head.next;
+    if (this.size > 0) this.tail = this.head.next;
   }
 
   findFirst(element) {
-    let current = this.head;
-    for (let i = 0; i < this.length; i++) {
-      if (current.data === element) return i;
-      current = current.next;
+    let node = this.head;
+    for (let i = 0; i < this.length(); i++) {
+      if (node.value === element) return i;
+      node = node.next;
     }
     return -1;
   }
 
   findLast(element) {
-    let current = this.head;
+    let node = this.head;
     let lastIndex = -1;
-    for (let i = 0; i < this.length; i++) {
-      if (current.data === element) lastIndex = i;
-      current = current.next;
+    for (let i = 0; i < this.length(); i++) {
+      if (node.value === element) lastIndex = i;
+      node = node.next;
     }
     return lastIndex;
   }
@@ -168,10 +157,10 @@ class SinglyLinkedList {
   }
 
   extend(elements) {
-    let current = elements.head;
-    for (let i = 0; i < elements.length; i++) {
-      this.append(current.data);
-      current = current.next;
+    let node = elements.head;
+    for (let i = 0; i < elements.length(); i++) {
+      this.append(node.value);
+      node = node.next;
     }
   }
 }

@@ -1,7 +1,26 @@
+/* eslint-disable max-len */
 'use strict';
 
-const { SinglyLinkedListNode } = require('./src/singlyLinkedListNode');
+const { SinglyLinkedList } = require('./src/singlyLinkedList.js');
 
-const node = new SinglyLinkedListNode(1);
+const list = new SinglyLinkedList();
+const list2 = new SinglyLinkedList();
 
-console.log(node.value);
+list.append('4');
+console.log(list.length());
+list.append('8');
+console.log(list.length());
+console.log(list.get(1));
+list2.append('d');
+list2.append('k');
+list2.append('o');
+list2.extend(list);
+console.log(list2.get(2));
+console.log(list.length());
+console.log(list2.length());
+console.log(`${list2.get(0)}, ${list2.get(1)}, ${list2.get(2)}, ${list2.get(3)}, ${list2.get(4)}`);
+list2.reverse();
+console.log(list2.length());
+console.log(`${list2.get(0)}, ${list2.get(1)}, ${list2.get(2)}, ${list2.get(3)}, ${list2.get(4)}`);
+list2.clear();
+console.log(list2.length());
