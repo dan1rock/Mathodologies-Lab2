@@ -29,7 +29,7 @@ In both of versions there are implemented methods:
 - extend - adds to the list all the elements of elements list.
 
 ## How to use
-The project requires node.js to be installed on your machine. I was working with 18.12.1 version.
+The project requires node.js to be installed on your machine. It was originally built on v19.7.0
 
 Install all dependancies:
 ```bash
@@ -45,3 +45,6 @@ To run tests:
 ```bash
 $ npm test
 ```
+##Conclusion
+
+Unit tests worth the time spent on implementing them. They helped me with finding and fixing them without manually running all king of situations. Their true potention revealed when working in big team of developers, because if all unit tests passed you can trust changes that were made by other developers.
