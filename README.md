@@ -45,6 +45,10 @@ To run tests:
 ```bash
 $ npm test
 ```
+## Commit with failed tests
+
+[Failed commit](https://github.com/dan1rock/Methodologies-Lab2/commit/e1c527960cb0d18e2318444ce21e89aab3d58b07)
+
 ## Conclusion
 
 Unit tests worth the time spent on implementing them. They helped me with finding and fixing them without manually running all king of situations. Their true potention revealed when working in big team of developers, because if all unit tests passed you can trust changes that were made by other developers.
