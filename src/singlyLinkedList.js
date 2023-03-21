@@ -76,25 +76,18 @@ class SinglyLinkedList {
   }
 
   deleteAll(element) {
-    let node = this.head;
-    let prevNode = this.tail;
-    let i = 0;
-    while (i < this.length()) {
-      if (node.value === element) {
-        if (i === 0) {
-          this.head = this.head.next;
-          this.tail.next = this.head;
-          prevNode = this.tail;
-        } else {
-          prevNode.next = node.next;
-          if (i === this.length() - 1) this.tail = prevNode;
-        }
-        i--;
-      } else {
-        prevNode = node;
+    if (this.head === this.tail) {
+      return;
+    }
+    let counter = 0;
+    let nodeToDelete = this.head;
+    while (nodeToDelete !== null) {
+      if (nodeToDelete.val === element) {
+        this.delete(counter);
+        counter--;
       }
-      node = node.next;
-      i++;
+      nodeToDelete = nodeToDelete.next;
+      counter++;
     }
   }
 
